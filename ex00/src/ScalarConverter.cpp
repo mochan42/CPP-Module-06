@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 13:24:59 by mochan            #+#    #+#             */
-/*   Updated: 2023/03/30 21:24:44 by mochan           ###   ########.fr       */
+/*   Updated: 2023/03/30 21:34:43 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ ScalarConverter::~ScalarConverter()
 std::string	ScalarConverter::getInput(void) const
 {
 	return (this->input);
+}
+
+void	ScalarConverter::setInput(std::string setInput)
+{
+	this->input = setInput;
 }
 
 //======== MEMBER FUNCTIONS =====================================================================

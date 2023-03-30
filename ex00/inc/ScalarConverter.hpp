@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 19:33:14 by mochan            #+#    #+#             */
-/*   Updated: 2023/03/30 21:22:45 by mochan           ###   ########.fr       */
+/*   Updated: 2023/03/30 21:41:06 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,19 @@ class	ScalarConverter
 
 		// GETTERS - SETTERS
 		std::string	getInput(void) const;
+		void		setInput(std::string setInput);
 
 		// MEMBER FUNCTIONS
+		
+		
+		class InputIsEmpty : public std::exception
+		{
+			public:
+				virtual const char* what() const throw()
+				{
+					return ("Input string is empty.");
+				}
+		};
 
 	private:
 		std::string	input;
