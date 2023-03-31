@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 19:33:14 by mochan            #+#    #+#             */
-/*   Updated: 2023/03/31 23:04:15 by mochan           ###   ########.fr       */
+/*   Updated: 2023/03/31 23:22:09 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <string>
 #include <cstring>
 #include <cstdlib>
-
+#include <cfloat>
 
 enum Types {
 	NOT_VALID	=	-1,

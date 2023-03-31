@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 13:24:59 by mochan            #+#    #+#             */
-/*   Updated: 2023/03/31 23:04:45 by mochan           ###   ########.fr       */
+/*   Updated: 2023/03/31 23:23:53 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,14 +120,15 @@ bool ScalarConverter::isDouble(void)
 {
 	bool	isDouble = false;
 	char*	endptr;
-	std::strtod(this->_input.c_str(), &endptr); // endptr is a pointer where the conversion stopped.
+	double	doubleValue = std::strtod(this->_input.c_str(), &endptr); // endptr is a pointer where the conversion stopped.
 
 	if (endptr == this->_input.c_str() || *endptr != '\0') // 1: checks if conversion failed(emptys tring). 2:last character of the string is not null terminator
-		isDouble = false;	
-	for (size_t i = 0; i < this->_input.length(); i++)
+		isDouble = false;
+	else
 	{
-		if (this->_input[i] == '.')
-			return true;
+		int numDots = std::count(this->_input.begin(), this->_input.end(), '.'); // count the occurences of '.'
+		if ((numDots <= 1 && numDots >= 0)  && doubleValue >= DBL_MIN && doubleValue <= DBL_MAX) // required to solve edge case 3f.14f when there are more than 1 "dot" as in f
+			isDouble = true;
 	}
 	return isDouble;
 }
