@@ -6,25 +6,27 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 19:33:14 by mochan            #+#    #+#             */
-/*   Updated: 2023/03/30 23:25:47 by mochan           ###   ########.fr       */
+/*   Updated: 2023/03/31 23:04:15 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCALARCONVERTER_HPP
 #define SCALARCONVERTER_HPP
 #include <iostream>
+#include <limits> // for numeric_limits<char>::min() and numeric_limits<char>::max()
+#include <string>
+#include <cstring>
+#include <cstdlib>
+
 
 enum Types {
-	CHAR,
-	DOUBLE,
-	FLOAT,
-	INT,
-	INFF_N,
-	INFF_P,
-	NANF,
-	INF_N,
-	INF_P,
-	// NAN,
+	NOT_VALID	=	-1,
+	CHAR		=	0,
+	INT			=	1,
+	FLOAT		=	2,
+	DOUBLE		=	3,
+	NANx		=	4,
+	INFx		=	5,
 };
 
 class	ScalarConverter
@@ -42,11 +44,16 @@ class	ScalarConverter
 		// GETTERS - SETTERS
 		std::string	getInput(void) const;
 		void		setInput(std::string setInput);
-		std::string	getType(void) const;
-		void		setType(std::string setType);
+		Types		getType(void) const;
+		void		setType(Types setType);
 
 		// MEMBER FUNCTIONS
+		bool	isChar(void);
+		bool	isInt(void);
+		bool	isFloat(void);
+		bool	isDouble(void);
 		void	checkType(void);
+
 		void	convert(void);
 		
 		class InputIsEmpty : public std::exception
@@ -60,8 +67,7 @@ class	ScalarConverter
 
 	private:
 		std::string	_input;
-		std::string	_type;
+		Types		_type;
 };
-
 
 #endif

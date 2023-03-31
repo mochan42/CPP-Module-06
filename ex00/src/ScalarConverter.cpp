@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 13:24:59 by mochan            #+#    #+#             */
-/*   Updated: 2023/03/30 23:25:54 by mochan           ###   ########.fr       */
+/*   Updated: 2023/03/31 23:04:45 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,23 +56,98 @@ void	ScalarConverter::setInput(std::string setInput)
 {
 	this->_input = setInput;
 }
-
-std::string	ScalarConverter::getType(void) const
+Types	ScalarConverter::getType(void) const
 {
 	return (this->_type);
 }
 
-void	ScalarConverter::setType(std::string setType)
+void	ScalarConverter::setType(Types setType)
 {
 	this->_type = setType;
 }
 
 //======== MEMBER FUNCTIONS =====================================================================
+bool	ScalarConverter::isChar(void)
+{
+	bool	isChar = false;
+
+	if (this->_input.length() != 1)
+		isChar = false;
+	else
+	{
+		int intValue = std::atoi(this->_input.c_str());
+		if (intValue >= std::numeric_limits<char>::min() && intValue <= std::numeric_limits<char>::max())
+			isChar = true;
+		else
+			isChar = false;
+	}
+	return (isChar);
+}
+
+bool	ScalarConverter::isInt(void)
+{
+	bool	isInt = false;
+	char	*endptr;
+	//strtol (not strtoi) is used to check for potential integer overflow.
+	long	intValue = std::strtol(this->_input.c_str(), &endptr, 10); //endptr is a pointer where conversion ended (at the dot for instance).
+
+	if (endptr == this->_input.c_str() || *endptr != '\0') // 1: checks if conversion failed(emptys tring). 2:last character of the string is not null terminator
+		isInt = false;
+	if (*endptr == '\0' && intValue >= INT_MIN && intValue <= INT_MAX) // 1: make sure there are no characters after the conversion ended. 2: check for INT overflow.
+		isInt = true;
+	else
+	{
+		isInt = false;
+		// std::cout << "Error: Integer overflow\n";
+	}
+	return (isInt);
+}
+
+bool ScalarConverter::isFloat(void)
+{
+	bool isFloat = false;
+
+	char* endptr;
+	std::strtof(this->_input.c_str(), &endptr); // endptr is a pointer where the conversion stopped.
+	if (endptr == this->_input.c_str() || *endptr != '\0') // 1: checks if conversion failed(emptys tring). 2:last character of the string is not null terminator
+		isFloat = false;
+	if (*endptr == 'f' && *(endptr + 1) == '\0') //1. check that there are no characters after suffix f.
+		isFloat = true;
+	return (isFloat);
+}
+
+bool ScalarConverter::isDouble(void)
+{
+	bool	isDouble = false;
+	char*	endptr;
+	std::strtod(this->_input.c_str(), &endptr); // endptr is a pointer where the conversion stopped.
+
+	if (endptr == this->_input.c_str() || *endptr != '\0') // 1: checks if conversion failed(emptys tring). 2:last character of the string is not null terminator
+		isDouble = false;	
+	for (size_t i = 0; i < this->_input.length(); i++)
+	{
+		if (this->_input[i] == '.')
+			return true;
+	}
+	return isDouble;
+}
 
 void	ScalarConverter::checkType(void)
 {
-	if (this->_input.length() == 1)
-		this->_type = "CHAR";
+	if (this->_input == "nan" || this->_input == "nanf" )
+		this->_type = NANx;
+	else if (this->_input == "-inf" || this->_input == "+inf" || this->_input == "-inff" || this->_input == "+inff" )
+		this->_type = INFx;
+	else if (isChar() == true)
+		this->_type = CHAR;
+	else if (isInt() == true)
+		this->_type = INT;
+	else if (isFloat() == true)
+		this->_type = FLOAT;
+	else if (isDouble() == true)
+		this->_type = DOUBLE;
+	else
+		_type = NOT_VALID;
 }
 
 void	ScalarConverter::convert(void)
