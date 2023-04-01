@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 13:24:59 by mochan            #+#    #+#             */
-/*   Updated: 2023/04/01 11:16:03 by mochan           ###   ########.fr       */
+/*   Updated: 2023/04/01 12:17:46 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,12 @@ bool	ScalarConverter::isInt(std::string const & input)
 	char	*endptr;
 	//strtol (not strtoi) is used to check for potential integer overflow.
 	long	intValue = std::strtol(input.c_str(), &endptr, 10); //endptr is a pointer where conversion ended (at the dot for instance).
-
 	if (endptr == input.c_str() || *endptr != '\0') // 1: checks if conversion failed(emptys tring). 2:last character of the string is not null terminator
 		isInt = false;
 	if (*endptr == '\0' && intValue >= INT_MIN && intValue <= INT_MAX) // 1: make sure there are no characters after the conversion ended. 2: check for INT overflow.
 		isInt = true;
 	else
-	{
 		isInt = false;
-		// std::cout << "Error: Integer overflow\n";
-	}
 	return (isInt);
 }
 
@@ -157,47 +153,144 @@ void	ScalarConverter::createConversionsFromNotValid(void)
 
 void	ScalarConverter::createConversionsFromChar(std::string const & input)
 {
-	(void) input;
+	char c = input[0];
+	std::cout << LIGRN << "===== Input to cast : " << BKLIGRN << input << D << LIGRN << " =====" << D << "\n";
+	if (std::isprint(c))
+		std::cout << BLU << "- into char	: "<< D << c << "\n";
+	else
+		std::cout << BLU << "- into char	: "<< input << "not printable" << "\n";
+	std::cout << GREEN << "- into int	: " << D << static_cast<float>(c) << "\n";
+	std::cout << YELL << "- into float	: " << D << static_cast<float>(c) << "\n";
+	std::cout << PU << "- into double	: " << D << static_cast<double>(c) << "\n";
 }
 
 void	ScalarConverter::createConversionsFromInt(std::string const & input)
 {
-	(void) input;
+	std::cout << LIGRN << "===== Input to cast : " << BKLIGRN << input << D << LIGRN << " =====" << D << "\n";
+	long int	longInt = strtol(this->_input.c_str(), NULL, 10);
+	if (longInt > INT_MAX || longInt < INT_MIN)
+	{
+		std::cout << "Error: Integer overflow" << "\n";
+		return ;
+	}
+	int	i = longInt;
+	if (i <= CHAR_MAX && i >= CHAR_MIN)
+	{
+		if (i >= 32 && i <= 127)
+			std::cout << BLU << "- into char	: "<< static_cast<char>(i) << "\n";
+		else
+			std::cout << BLU << "- into char	: "<< input << "not printable" << "\n";
+	}
+	else
+		std::cout << BLU << "- into char	: impossible" << "\n";
+	std::cout << GREEN << "- into int	: " << D << i << "\n";
+	std::cout << YELL << "- into float	: " << D << static_cast<float>(i);
+	if (i < 1000000)
+		std::cout << ".0f" << "\n";
+	else
+		std::cout << "f" << "\n";
+	std::cout << PU << "- into double	: " << D << static_cast<double>(i);
+	if (i < 1000000)
+		std::cout << ".0" << "\n\n";
+	else
+		std::cout << "\n";
 }
 
 void	ScalarConverter::createConversionsFromFloat(std::string const & input)
 {
-	(void) input;
+	std::cout << LIGRN << "===== Input to cast : " << BKLIGRN << input << D << LIGRN << " =====" << D << "\n";
+	float	f = strtof(this->_input.c_str(), NULL);
+	if (f <= CHAR_MAX && f >= CHAR_MIN)
+	{
+		if (f >= 32 && f <= 127)
+			std::cout << BLU << "- into char	: "<< D << static_cast<char>(f) << "\n";
+		else
+			std::cout << BLU << "- into char	: "<< D << "Non displayable" << "\n";
+	}
+	else
+		std::cout << BLU << "- into char	: "<< D << "impossible" << "\n";
+	if (f < INT_MIN || f > INT_MAX)
+		std::cout << GREEN << "- into int	: " << D << "impossible" << "\n";
+	else
+		std::cout << GREEN << "- into int	: " << D << static_cast<int>(f) << "\n";
+	std::cout << YELL << "- into float	: " << D << f;
+	if (f <= 999999)
+		std::cout << ".0f" << "\n";
+	else
+		std::cout << "f" << "\n";
+	std::cout << PU << "- into double	: " << D << static_cast<double>(f);
+	if (f <= 999999)
+		std::cout << ".0";
+	std::cout << "\n";
 }
 
 void	ScalarConverter::createConversionsFromDouble(std::string const & input)
 {
-	(void) input;
+	std::cout << LIGRN << "===== Input to cast : " << BKLIGRN << input << D << LIGRN << " =====" << D << "\n";
+	double d = strtod(this->_input.c_str(), NULL);
+	if (d <= CHAR_MAX && d >= CHAR_MIN)
+	{
+		if (d >= 32 && d <= 127)
+			std::cout << BLU << "- into char	: "<< D << static_cast<char>(d) << "\n";
+		else
+			std::cout << BLU << "- into char	: "<< D << "Non displayable" << "\n";
+	}
+	else
+		std::cout << BLU << "- into char	: "<< D << "impossible" << "\n";
+	if (d < INT_MIN || d > INT_MAX)
+		std::cout << GREEN << "- into int	: " << D << "impossible" << "\n";
+	else
+		std::cout << GREEN << "- into int	: " << D << static_cast<int>(d) << "\n";
+	std::cout << YELL << "- into float	: " << D << static_cast<float>(d);
+	if (d <= 999999)
+		std::cout << ".0f" << "\n";
+	else
+		std::cout << "f" << "\n";
+	std::cout << PU << "- into double	: " << D << d;
+	if (d <= 999999)
+		std::cout << ".0";
+	std::cout << "\n";
 }
 
 void	ScalarConverter::createConversionsFromNANx(std::string const & input)
 {
-	std::cout << LIGRN << "\n===== Input to cast : " << BKLIGRN << input << D << LIGRN << " =====" << D << "\n";
+	std::cout << LIGRN << "===== Input to cast : " << BKLIGRN << input << D << LIGRN << " =====" << D << "\n";
 	std::cout << BLU << "- into char	: "<< D << "impossible" << "\n";
 	std::cout << GREEN << "- into int	: " << D << "impossible" << "\n";
-	std::cout << YELL << "- into float	: " << D << "nanf" << "\n";
-	std::cout << PU << "- into double	: " << D << "nan" << "\n\n";
+	if (this->_input == "nanf")
+	{
+		float f = std::numeric_limits<float>::quiet_NaN();
+		std::cout << YELL << "- into float	: " << D << f << "f" << "\n";
+		std::cout << PU << "- into double	: " << D << static_cast<double>(f) << D << "\n\n";
+	}
+	else if (this->_input == "nan")
+	{
+		double d = std::numeric_limits<float>::quiet_NaN();
+		std::cout << YELL << "- into float	: " << static_cast<float>(d) << "f" << "\n";
+		std::cout << PU << "- into double	: " << d << D << "\n";
+	}
 }
 
 void	ScalarConverter::createConversionsFromINFx(std::string const & input)
 {
-	std::cout << LIGRN << "\n===== Input to cast : " << BKLIGRN << input << D << LIGRN << " =====" << D << "\n";
+	std::cout << LIGRN << "===== Input to cast : " << BKLIGRN << input << D << LIGRN << " =====" << D << "\n";
 	std::cout << BLU << "- into char	: "<< D << "impossible" << "\n";
 	std::cout << GREEN << "- into int	: " << D << "impossible" << "\n";
-	if (input == "inf" || input == "inff" || input == "+inf" || input == "+inff" )
+	if (input == "-inff" || input == "+inff" )
 	{
-		std::cout << YELL << "- into float	: " << D << "inff" << "\n";
-		std::cout << PU << "- into double	: " << D << "inf" << "\n\n";
+		float f = std::numeric_limits<float>::infinity();
+		if (input.at(0) == '-')
+			f = -f;
+		std::cout << YELL << "- into float	: " << D << f << "f" << "\n";
+		std::cout << PU << "- into double	: " << D << static_cast<double>(f) << D << "\n\n";
 	}
-	if (input == "-inf" || input == "-inff")
+	if (input == "-inf" || input == "inf" || input == "+inf")
 	{
-		std::cout << YELL << "- into float	: " << D << "-inff" << "\n";
-		std::cout << PU << "- into double	: " << D << "-inf" << "\n\n";
+		double d = std::numeric_limits<float>::infinity();
+		if (input.at(0) == '-')
+			d = -d;
+		std::cout << YELL << "- into float	: " << static_cast<float>(d) << "f" << "\n";
+		std::cout << PU << "- into double	: " << d << D << "\n";
 	}
 }
 
@@ -235,7 +328,7 @@ void	ScalarConverter::createConversions(std::string const & input)
 void	ScalarConverter::convert(std::string const & input)
 {
 	checkType(input);
-	std::cout << getType() << "\n";
+	std::cout << "Type is: " << getType() << "\n";
 	createConversions(input);
 }
 

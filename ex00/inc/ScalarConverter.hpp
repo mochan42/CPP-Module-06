@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 19:33:14 by mochan            #+#    #+#             */
-/*   Updated: 2023/04/01 10:28:15 by mochan           ###   ########.fr       */
+/*   Updated: 2023/04/01 11:55:46 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,6 @@ class	ScalarConverter
 	private:
 		std::string	_input;
 		Types		_type;
-		// char		_inputToChar;
-		// int			_inputToInt;
-		// float		_inputToFloat;
-		// double		_inputToDouble;
 };
 
 #endif
