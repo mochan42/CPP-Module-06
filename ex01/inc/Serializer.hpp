@@ -1,34 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Data.hpp                                           :+:      :+:    :+:   */
+/*   Serializer.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/01 13:13:49 by mochan            #+#    #+#             */
-/*   Updated: 2023/04/01 13:23:54 by mochan           ###   ########.fr       */
+/*   Created: 2023/04/01 15:01:08 by mochan            #+#    #+#             */
+/*   Updated: 2023/04/01 15:42:52 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_HPP
-#define DATA_HPP
+#ifndef SERIALIZER_HPP
+#define SERIALIZER_HPP
 #include <iostream>
 
-class	Data
+struct Data {
+	std::string	stringValue;
+	int			intValue;
+};
+
+class	Serializer
 {
 	public:
 		// CONSTRUCTORS - DESTRUCTOR
-		Data(); // Default constructor
-		Data(const Data& src); // Default copy constructor
-		~Data(); // Destructor
+		Serializer(); // Default constructor
+		Serializer(const Serializer& src); // Default copy constructor
+		~Serializer(); // Destructor
 
 		// OVERLOAD OPERATOR
-		Data&	operator=(const Data& src);
+		Serializer&	operator=(const Serializer& src);
+
 		// GETTERS - SETTERS
 
-
 		// MEMBER FUNCTIONS
-
+		uintptr_t	serialize(Data* ptr);
+		Data*		deserialize(uintptr_t raw);
 
 	private:
 		

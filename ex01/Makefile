@@ -21,7 +21,7 @@ END_COLOR			:= \033[0;39m
 # **************************************************************************** #
 # SOURCES
 
-SRC_FILES			:= Data.cpp main.cpp
+SRC_FILES			:= Serializer.cpp main.cpp
 
 OBJ_FILES			:= ${SRC_FILES:.cpp=.o}
 

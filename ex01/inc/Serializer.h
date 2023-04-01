@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Data.h                                             :+:      :+:    :+:   */
+/*   Serializer.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/01 13:13:04 by mochan            #+#    #+#             */
-/*   Updated: 2023/04/01 13:13:20 by mochan           ###   ########.fr       */
+/*   Created: 2023/04/01 15:00:56 by mochan            #+#    #+#             */
+/*   Updated: 2023/04/01 15:03:10 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_H
-#define DATA_H
+#ifndef SERIALIZER_H
+#define SERIALIZER_H
 
-#include "Data.hpp"
+#include "Serializer.hpp"
 
 // *** COLORS ***//
 # define BLANK "\e[0m"
