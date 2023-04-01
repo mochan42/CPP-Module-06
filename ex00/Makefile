@@ -1,7 +1,7 @@
 # **************************************************************************** #
 # VARIABLES
 
-NAME				:= ex00
+NAME				:= ScalarConverter
 
 CC					:= c++
 CFLAGS				:= -Wall -Wextra -Werror -std=c++98

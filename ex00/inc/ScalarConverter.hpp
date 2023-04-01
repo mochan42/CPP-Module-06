@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 19:33:14 by mochan            #+#    #+#             */
-/*   Updated: 2023/03/31 23:22:09 by mochan           ###   ########.fr       */
+/*   Updated: 2023/04/01 10:28:15 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 #include <string>
 #include <cstring>
 #include <cstdlib>
-#include <cfloat>
+#include <cfloat> // for DBL_MIN, DBL_MAX
 
-enum Types {
+enum Types
+{
 	NOT_VALID	=	-1,
 	CHAR		=	0,
 	INT			=	1,
@@ -48,13 +49,20 @@ class	ScalarConverter
 		void		setType(Types setType);
 
 		// MEMBER FUNCTIONS
-		bool	isChar(void);
-		bool	isInt(void);
-		bool	isFloat(void);
-		bool	isDouble(void);
-		void	checkType(void);
-
-		void	convert(void);
+		bool	isChar(std::string const & input);
+		bool	isInt(std::string const & input);
+		bool	isFloat(std::string const & input);
+		bool	isDouble(std::string const & input);
+		void	checkType(std::string const & input);
+		void	createConversionsFromNotValid(void);
+		void	createConversionsFromChar(std::string const & input);
+		void	createConversionsFromInt(std::string const & input);
+		void	createConversionsFromFloat(std::string const & input);
+		void	createConversionsFromDouble(std::string const & input);
+		void	createConversionsFromNANx(std::string const & input);
+		void	createConversionsFromINFx(std::string const & input);
+		void	createConversions(std::string const & input);
+		void	convert(std::string const & input);
 		
 		class InputIsEmpty : public std::exception
 		{
@@ -68,6 +76,10 @@ class	ScalarConverter
 	private:
 		std::string	_input;
 		Types		_type;
+		// char		_inputToChar;
+		// int			_inputToInt;
+		// float		_inputToFloat;
+		// double		_inputToDouble;
 };
 
 #endif

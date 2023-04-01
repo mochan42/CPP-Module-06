@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 19:32:21 by mochan            #+#    #+#             */
-/*   Updated: 2023/03/31 23:05:02 by mochan           ###   ########.fr       */
+/*   Updated: 2023/04/01 11:15:09 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int main(int ac, char **argv)
 				input = argv[1];
 				Convert1.setInput(input);
 				std::cout << "Input is: " << Convert1.getInput() << "\n";
-				Convert1.convert();
+				Convert1.convert(input);
 			}
 		}
 		catch(const std::exception& e)

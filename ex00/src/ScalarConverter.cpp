@@ -6,14 +6,13 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 13:24:59 by mochan            #+#    #+#             */
-/*   Updated: 2023/03/31 23:23:53 by mochan           ###   ########.fr       */
+/*   Updated: 2023/04/01 11:16:03 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.h"
 
 //======== CONSTRUCTORS =========================================================================
-
 ScalarConverter::ScalarConverter()
 {
 	std::cout << BLU << "Default constructor called from ScalarConverter" << D << "\n";
@@ -67,15 +66,15 @@ void	ScalarConverter::setType(Types setType)
 }
 
 //======== MEMBER FUNCTIONS =====================================================================
-bool	ScalarConverter::isChar(void)
+bool	ScalarConverter::isChar(std::string const & input)
 {
 	bool	isChar = false;
 
-	if (this->_input.length() != 1)
+	if (input.length() != 1)
 		isChar = false;
 	else
 	{
-		int intValue = std::atoi(this->_input.c_str());
+		int intValue = std::atoi(input.c_str());
 		if (intValue >= std::numeric_limits<char>::min() && intValue <= std::numeric_limits<char>::max())
 			isChar = true;
 		else
@@ -84,14 +83,14 @@ bool	ScalarConverter::isChar(void)
 	return (isChar);
 }
 
-bool	ScalarConverter::isInt(void)
+bool	ScalarConverter::isInt(std::string const & input)
 {
 	bool	isInt = false;
 	char	*endptr;
 	//strtol (not strtoi) is used to check for potential integer overflow.
-	long	intValue = std::strtol(this->_input.c_str(), &endptr, 10); //endptr is a pointer where conversion ended (at the dot for instance).
+	long	intValue = std::strtol(input.c_str(), &endptr, 10); //endptr is a pointer where conversion ended (at the dot for instance).
 
-	if (endptr == this->_input.c_str() || *endptr != '\0') // 1: checks if conversion failed(emptys tring). 2:last character of the string is not null terminator
+	if (endptr == input.c_str() || *endptr != '\0') // 1: checks if conversion failed(emptys tring). 2:last character of the string is not null terminator
 		isInt = false;
 	if (*endptr == '\0' && intValue >= INT_MIN && intValue <= INT_MAX) // 1: make sure there are no characters after the conversion ended. 2: check for INT overflow.
 		isInt = true;
@@ -103,58 +102,141 @@ bool	ScalarConverter::isInt(void)
 	return (isInt);
 }
 
-bool ScalarConverter::isFloat(void)
+bool ScalarConverter::isFloat(std::string const & input)
 {
 	bool isFloat = false;
 
 	char* endptr;
-	std::strtof(this->_input.c_str(), &endptr); // endptr is a pointer where the conversion stopped.
-	if (endptr == this->_input.c_str() || *endptr != '\0') // 1: checks if conversion failed(emptys tring). 2:last character of the string is not null terminator
+	std::strtof(input.c_str(), &endptr); // endptr is a pointer where the conversion stopped.
+	if (endptr == input.c_str() || *endptr != '\0') // 1: checks if conversion failed(emptys tring). 2:last character of the string is not null terminator
 		isFloat = false;
 	if (*endptr == 'f' && *(endptr + 1) == '\0') //1. check that there are no characters after suffix f.
 		isFloat = true;
 	return (isFloat);
 }
 
-bool ScalarConverter::isDouble(void)
+bool ScalarConverter::isDouble(std::string const & input)
 {
 	bool	isDouble = false;
 	char*	endptr;
-	double	doubleValue = std::strtod(this->_input.c_str(), &endptr); // endptr is a pointer where the conversion stopped.
+	double	doubleValue = std::strtod(input.c_str(), &endptr); // endptr is a pointer where the conversion stopped.
 
-	if (endptr == this->_input.c_str() || *endptr != '\0') // 1: checks if conversion failed(emptys tring). 2:last character of the string is not null terminator
+	if (endptr == input.c_str() || *endptr != '\0') // 1: checks if conversion failed(emptys tring). 2:last character of the string is not null terminator
 		isDouble = false;
 	else
 	{
-		int numDots = std::count(this->_input.begin(), this->_input.end(), '.'); // count the occurences of '.'
+		int numDots = std::count(input.begin(), input.end(), '.'); // count the occurences of '.'
 		if ((numDots <= 1 && numDots >= 0)  && doubleValue >= DBL_MIN && doubleValue <= DBL_MAX) // required to solve edge case 3f.14f when there are more than 1 "dot" as in f
 			isDouble = true;
 	}
 	return isDouble;
 }
 
-void	ScalarConverter::checkType(void)
+void	ScalarConverter::checkType(std::string const & input)
 {
-	if (this->_input == "nan" || this->_input == "nanf" )
+	if (input == "nan" || input == "nanf" )
 		this->_type = NANx;
-	else if (this->_input == "-inf" || this->_input == "+inf" || this->_input == "-inff" || this->_input == "+inff" )
+	else if (input == "-inf" || input == "inf" || input == "+inf" || input == "-inff" || input == "+inff" )
 		this->_type = INFx;
-	else if (isChar() == true)
+	else if (isChar(input) == true)
 		this->_type = CHAR;
-	else if (isInt() == true)
+	else if (isInt(input) == true)
 		this->_type = INT;
-	else if (isFloat() == true)
+	else if (isFloat(input) == true)
 		this->_type = FLOAT;
-	else if (isDouble() == true)
+	else if (isDouble(input) == true)
 		this->_type = DOUBLE;
 	else
 		_type = NOT_VALID;
 }
 
-void	ScalarConverter::convert(void)
+void	ScalarConverter::createConversionsFromNotValid(void)
 {
-	checkType();
+	std::cout << RED << "Error: Input cannot be converted and needs to be of scalar type such as : char, int, float or double." << D << "\n";
+}
+
+void	ScalarConverter::createConversionsFromChar(std::string const & input)
+{
+	(void) input;
+}
+
+void	ScalarConverter::createConversionsFromInt(std::string const & input)
+{
+	(void) input;
+}
+
+void	ScalarConverter::createConversionsFromFloat(std::string const & input)
+{
+	(void) input;
+}
+
+void	ScalarConverter::createConversionsFromDouble(std::string const & input)
+{
+	(void) input;
+}
+
+void	ScalarConverter::createConversionsFromNANx(std::string const & input)
+{
+	std::cout << LIGRN << "\n===== Input to cast : " << BKLIGRN << input << D << LIGRN << " =====" << D << "\n";
+	std::cout << BLU << "- into char	: "<< D << "impossible" << "\n";
+	std::cout << GREEN << "- into int	: " << D << "impossible" << "\n";
+	std::cout << YELL << "- into float	: " << D << "nanf" << "\n";
+	std::cout << PU << "- into double	: " << D << "nan" << "\n\n";
+}
+
+void	ScalarConverter::createConversionsFromINFx(std::string const & input)
+{
+	std::cout << LIGRN << "\n===== Input to cast : " << BKLIGRN << input << D << LIGRN << " =====" << D << "\n";
+	std::cout << BLU << "- into char	: "<< D << "impossible" << "\n";
+	std::cout << GREEN << "- into int	: " << D << "impossible" << "\n";
+	if (input == "inf" || input == "inff" || input == "+inf" || input == "+inff" )
+	{
+		std::cout << YELL << "- into float	: " << D << "inff" << "\n";
+		std::cout << PU << "- into double	: " << D << "inf" << "\n\n";
+	}
+	if (input == "-inf" || input == "-inff")
+	{
+		std::cout << YELL << "- into float	: " << D << "-inff" << "\n";
+		std::cout << PU << "- into double	: " << D << "-inf" << "\n\n";
+	}
+}
+
+void	ScalarConverter::createConversions(std::string const & input)
+{
+	switch (this->_type)
+	{
+	case -1:
+		createConversionsFromNotValid();
+		break;
+	case 0:
+		createConversionsFromChar(input);
+		break;
+	case 1:
+		createConversionsFromInt(input);
+		break;
+	case 2:
+		createConversionsFromFloat(input);
+		break;
+	case 3:
+		createConversionsFromDouble(input);
+		break;
+	case 4:
+		createConversionsFromNANx(input);
+		break;
+	case 5:
+		createConversionsFromINFx(input);
+		break;
+	default:
+		std::cout << RED << "Error: fatal" << D << "\n";
+		break;
+	}
+}
+
+void	ScalarConverter::convert(std::string const & input)
+{
+	checkType(input);
 	std::cout << getType() << "\n";
+	createConversions(input);
 }
 
 //=============== FUNCTIONS =====================================================================
