@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 13:24:59 by mochan            #+#    #+#             */
-/*   Updated: 2023/04/01 12:17:46 by mochan           ###   ########.fr       */
+/*   Updated: 2023/04/01 12:55:11 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	ScalarConverter::setType(Types setType)
 	this->_type = setType;
 }
 
+
 //======== MEMBER FUNCTIONS =====================================================================
 bool	ScalarConverter::isChar(std::string const & input)
 {
@@ -115,14 +116,15 @@ bool ScalarConverter::isDouble(std::string const & input)
 {
 	bool	isDouble = false;
 	char*	endptr;
-	double	doubleValue = std::strtod(input.c_str(), &endptr); // endptr is a pointer where the conversion stopped.
+	std::strtod(input.c_str(), &endptr); // endptr is a pointer where the conversion stopped.
+	size_t	pos;
 
 	if (endptr == input.c_str() || *endptr != '\0') // 1: checks if conversion failed(emptys tring). 2:last character of the string is not null terminator
 		isDouble = false;
 	else
 	{
-		int numDots = std::count(input.begin(), input.end(), '.'); // count the occurences of '.'
-		if ((numDots <= 1 && numDots >= 0)  && doubleValue >= DBL_MIN && doubleValue <= DBL_MAX) // required to solve edge case 3f.14f when there are more than 1 "dot" as in f
+		pos = input.find('.');
+		if (pos != std::string::npos)
 			isDouble = true;
 	}
 	return isDouble;
@@ -134,14 +136,14 @@ void	ScalarConverter::checkType(std::string const & input)
 		this->_type = NANx;
 	else if (input == "-inf" || input == "inf" || input == "+inf" || input == "-inff" || input == "+inff" )
 		this->_type = INFx;
-	else if (isChar(input) == true)
-		this->_type = CHAR;
 	else if (isInt(input) == true)
 		this->_type = INT;
 	else if (isFloat(input) == true)
 		this->_type = FLOAT;
 	else if (isDouble(input) == true)
 		this->_type = DOUBLE;
+	else if (isChar(input) == true)
+		this->_type = CHAR;
 	else
 		_type = NOT_VALID;
 }
@@ -158,7 +160,7 @@ void	ScalarConverter::createConversionsFromChar(std::string const & input)
 	if (std::isprint(c))
 		std::cout << BLU << "- into char	: "<< D << c << "\n";
 	else
-		std::cout << BLU << "- into char	: "<< input << "not printable" << "\n";
+		std::cout << BLU << "- into char	: "<< D << input << "not printable" << "\n";
 	std::cout << GREEN << "- into int	: " << D << static_cast<float>(c) << "\n";
 	std::cout << YELL << "- into float	: " << D << static_cast<float>(c) << "\n";
 	std::cout << PU << "- into double	: " << D << static_cast<double>(c) << "\n";
@@ -177,9 +179,9 @@ void	ScalarConverter::createConversionsFromInt(std::string const & input)
 	if (i <= CHAR_MAX && i >= CHAR_MIN)
 	{
 		if (i >= 32 && i <= 127)
-			std::cout << BLU << "- into char	: "<< static_cast<char>(i) << "\n";
+			std::cout << BLU << "- into char	: "<< D << static_cast<char>(i) << "\n";
 		else
-			std::cout << BLU << "- into char	: "<< input << "not printable" << "\n";
+			std::cout << BLU << "- into char	: "<< D << "not printable" << "\n";
 	}
 	else
 		std::cout << BLU << "- into char	: impossible" << "\n";
@@ -328,8 +330,5 @@ void	ScalarConverter::createConversions(std::string const & input)
 void	ScalarConverter::convert(std::string const & input)
 {
 	checkType(input);
-	std::cout << "Type is: " << getType() << "\n";
 	createConversions(input);
 }
-
-//=============== FUNCTIONS =====================================================================
