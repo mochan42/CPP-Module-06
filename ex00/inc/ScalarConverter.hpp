@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 19:33:14 by mochan            #+#    #+#             */
-/*   Updated: 2023/04/01 12:31:04 by mochan           ###   ########.fr       */
+/*   Updated: 2023/04/01 13:19:27 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ class	ScalarConverter
 		// CONSTRUCTORS - DESTRUCTOR
 		ScalarConverter(); // Default constructor
 		ScalarConverter(std::string const & setInput); // Parameterized constructor
-		ScalarConverter(const ScalarConverter& other); // Default copy constructor
+		ScalarConverter(const ScalarConverter& src); // Default copy constructor
 		~ScalarConverter(); // Destructor
 
 		// OVERLOAD OPERATOR
