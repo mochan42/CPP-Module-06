@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 13:24:59 by mochan            #+#    #+#             */
-/*   Updated: 2023/04/02 15:49:14 by mochan           ###   ########.fr       */
+/*   Updated: 2023/04/02 16:02:59 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ void	ScalarConverter::createConversionsFromChar(std::string const & input)
 {
 	char c = input[0];
 	std::cout << LIGRN << "===== Input to cast : " << BKLIGRN << input << D << LIGRN << " =====" << D << "\n";
-	std::cout << BLU << "- into char\t: " << D << c << "\n";
+	std::cout << BLU << "- into char\t: " << D << "\'" << c << "\'\n";
 	std::cout << GREEN << "- into int\t: " << D << static_cast<int>(c) << "\n";
 	std::cout << YELL << "- into float\t: " << D << std::fixed << std::setprecision(1) << static_cast<float>(c) << "f" << "\n";
 	std::cout << PU << "- into double\t: " << D << std::fixed << std::setprecision(1) << static_cast<double>(c) << "\n";
@@ -198,7 +198,7 @@ void	ScalarConverter::createConversionsFromInt(std::string const & input)
 	if (i <= CHAR_MAX && i >= CHAR_MIN)
 	{
 		if (i >= 32 && i <= 127)
-			std::cout << BLU << "- into char\t: "<< D << static_cast<char>(i) << "\n";
+			std::cout << BLU << "- into char\t: "<< D << "\'" << static_cast<char>(i) << "\'\n";
 		else
 			std::cout << BLU << "- into char\t: "<< D << "Non displayable" << "\n";
 	}
@@ -217,7 +217,7 @@ void	ScalarConverter::createConversionsFromFloat(std::string const & input)
 	if (f <= CHAR_MAX && f >= CHAR_MIN)
 	{
 		if (f >= 32 && f <= 127)
-			std::cout << BLU << "- into char\t: "<< D << static_cast<char>(f) << "\n";
+			std::cout << BLU << "- into char\t: "<< D << "\'" << static_cast<char>(f) << "\'\n";
 		else
 			std::cout << BLU << "- into char\t: "<< D << "Non displayable" << "\n";
 	}
@@ -238,7 +238,7 @@ void	ScalarConverter::createConversionsFromDouble(std::string const & input)
 	if (d <= CHAR_MAX && d >= CHAR_MIN)
 	{
 		if (d >= 32 && d <= 127)
-			std::cout << BLU << "- into char\t: "<< D << static_cast<char>(d) << "\n";
+			std::cout << BLU << "- into char\t: "<< D << "\'" << static_cast<char>(d) << "\'\n";
 		else
 			std::cout << BLU << "- into char\t: "<< D << "Non displayable" << "\n";
 	}

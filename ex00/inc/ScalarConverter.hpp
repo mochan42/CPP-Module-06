@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 19:33:14 by mochan            #+#    #+#             */
-/*   Updated: 2023/04/02 15:46:32 by mochan           ###   ########.fr       */
+/*   Updated: 2023/04/02 15:54:36 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,6 @@ class	ScalarConverter
 		static void	createConversionsFromINFx(std::string const & input);
 		static void	createConversions(std::string const & input);
 		static void	convert(std::string const & input);
-		
-		class InputIsEmpty : public std::exception
-		{
-			public:
-				virtual const char* what() const throw()
-				{
-					return ("Input string is empty.");
-				}
-		};
 
 	private:
 		// CONSTRUCTORS : cannot be declared as static because they are responsible for initialization.
