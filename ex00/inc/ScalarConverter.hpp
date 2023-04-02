@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 19:33:14 by mochan            #+#    #+#             */
-/*   Updated: 2023/04/01 13:19:27 by mochan           ###   ########.fr       */
+/*   Updated: 2023/04/02 12:18:36 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,36 +33,33 @@ enum Types
 class	ScalarConverter
 {
 	public:
-		// CONSTRUCTORS - DESTRUCTOR
-		ScalarConverter(); // Default constructor
-		ScalarConverter(std::string const & setInput); // Parameterized constructor
-		ScalarConverter(const ScalarConverter& src); // Default copy constructor
 		~ScalarConverter(); // Destructor
 
-		// OVERLOAD OPERATOR
-		ScalarConverter& operator=(const ScalarConverter& src);
-
 		// GETTERS - SETTERS
-		std::string	getInput(void) const;
-		void		setInput(std::string setInput);
-		Types		getType(void) const;
-		void		setType(Types setType);
+		static std::string		getInput(void);
+		static void				setInput(std::string setInput);
+		static Types			getType(void);
+		static void				setType(Types setType);
+		static ScalarConverter*	createInstance();
+		static ScalarConverter*	createParameterizedInstance(std::string const & setInput);
+		static ScalarConverter*	createDefaultCopyInstance(const ScalarConverter& src);
+
 
 		// MEMBER FUNCTIONS
-		bool	isChar(std::string const & input);
-		bool	isInt(std::string const & input);
-		bool	isFloat(std::string const & input);
-		bool	isDouble(std::string const & input);
-		void	checkType(std::string const & input);
-		void	createConversionsFromNotValid(void);
-		void	createConversionsFromChar(std::string const & input);
-		void	createConversionsFromInt(std::string const & input);
-		void	createConversionsFromFloat(std::string const & input);
-		void	createConversionsFromDouble(std::string const & input);
-		void	createConversionsFromNANx(std::string const & input);
-		void	createConversionsFromINFx(std::string const & input);
-		void	createConversions(std::string const & input);
-		void	convert(std::string const & input);
+		// bool	isChar(std::string const & input);
+		// bool	isInt(std::string const & input);
+		// bool	isFloat(std::string const & input);
+		// bool	isDouble(std::string const & input);
+		// void	checkType(std::string const & input);
+		// void	createConversionsFromNotValid(void);
+		// void	createConversionsFromChar(std::string const & input);
+		// void	createConversionsFromInt(std::string const & input);
+		// void	createConversionsFromFloat(std::string const & input);
+		// void	createConversionsFromDouble(std::string const & input);
+		// void	createConversionsFromNANx(std::string const & input);
+		// void	createConversionsFromINFx(std::string const & input);
+		// void	createConversions(std::string const & input);
+		// void	convert(std::string const & input);
 		
 		class InputIsEmpty : public std::exception
 		{
@@ -74,8 +71,17 @@ class	ScalarConverter
 		};
 
 	private:
-		std::string	_input;
-		Types		_type;
+		// CONSTRUCTORS - DESTRUCTOR
+		ScalarConverter(); // Default constructor
+		ScalarConverter(std::string const & setInput); // Parameterized constructor
+		ScalarConverter(const ScalarConverter& src); // Default copy constructor
+
+		// OVERLOAD OPERATOR
+		ScalarConverter& operator=(const ScalarConverter& src);
+
+		// MEMBER ATTRIBUTES
+		static std::string	_input;
+		static Types		_type;
 };
 
 #endif
