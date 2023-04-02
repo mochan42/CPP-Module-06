@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 19:33:14 by mochan            #+#    #+#             */
-/*   Updated: 2023/04/02 13:23:29 by mochan           ###   ########.fr       */
+/*   Updated: 2023/04/02 13:37:56 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,20 @@ class	ScalarConverter
 
 
 		// MEMBER FUNCTIONS
-		// bool	isChar(std::string const & input);
-		// bool	isInt(std::string const & input);
-		// bool	isFloat(std::string const & input);
-		// bool	isDouble(std::string const & input);
-		// static void	checkType(std::string const & input);
-		// void	createConversionsFromNotValid(void);
-		// void	createConversionsFromChar(std::string const & input);
-		// void	createConversionsFromInt(std::string const & input);
-		// void	createConversionsFromFloat(std::string const & input);
-		// void	createConversionsFromDouble(std::string const & input);
-		// void	createConversionsFromNANx(std::string const & input);
-		// void	createConversionsFromINFx(std::string const & input);
-		// void	createConversions(std::string const & input);
-		// void	convert(std::string const & input);
+		static bool	isChar(std::string const & input);
+		static bool	isInt(std::string const & input);
+		static bool	isFloat(std::string const & input);
+		static bool	isDouble(std::string const & input);
+		static void	checkType(std::string const & input);
+		static void	createConversionsFromNotValid(void);
+		static void	createConversionsFromChar(std::string const & input);
+		static void	createConversionsFromInt(std::string const & input);
+		static void	createConversionsFromFloat(std::string const & input);
+		static void	createConversionsFromDouble(std::string const & input);
+		static void	createConversionsFromNANx(std::string const & input);
+		static void	createConversionsFromINFx(std::string const & input);
+		static void	createConversions(std::string const & input);
+		static void	convert(std::string const & input);
 		
 		class InputIsEmpty : public std::exception
 		{
