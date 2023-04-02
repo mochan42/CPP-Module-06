@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 19:32:21 by mochan            #+#    #+#             */
-/*   Updated: 2023/04/02 13:27:21 by mochan           ###   ########.fr       */
+/*   Updated: 2023/04/02 15:46:16 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,8 @@ int main(int ac, char **argv)
 
 				input = argv[1];
 				Convert1->setInput(input);
-				std::cout << Convert1->getInput() << "\n";
 				Convert1->convert(input);
-				
-				// ScalarConverter* Convert2 = ScalarConverter::createParameterizedInstance("34");
-				// std::cout << Convert2->getInput() << "\n";
-				
-				// ScalarConverter* Convert3 = ScalarConverter::createDefaultCopyInstance(*Convert2);
-				// std::cout << Convert3->getInput() << "\n";
-
-				// ScalarConverter* Convert4 = Convert3;
-				// std::cout << Convert4->getInput() << "\n";
-
 				delete Convert1;
-				// delete Convert2;
-				// delete Convert3;
 			}
 		}
 		catch(const std::exception& e)

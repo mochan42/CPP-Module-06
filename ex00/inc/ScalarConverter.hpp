@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 19:33:14 by mochan            #+#    #+#             */
-/*   Updated: 2023/04/02 13:37:56 by mochan           ###   ########.fr       */
+/*   Updated: 2023/04/02 15:46:32 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <cfloat> // for DBL_MIN, DBL_MAX
+#include <iomanip> // for setprecision
 
 enum Types
 {
@@ -33,7 +34,8 @@ enum Types
 class	ScalarConverter
 {
 	public:
-		~ScalarConverter(); // Destructor
+		// DESTRUCTORS
+		~ScalarConverter(); // Destructor cannot be private, otherwise will not be called.
 
 		// GETTERS - SETTERS
 		static std::string		getInput(void);
@@ -43,7 +45,6 @@ class	ScalarConverter
 		static ScalarConverter*	createInstance();
 		static ScalarConverter*	createParameterizedInstance(std::string const & setInput);
 		static ScalarConverter*	createDefaultCopyInstance(const ScalarConverter& src);
-
 
 		// MEMBER FUNCTIONS
 		static bool	isChar(std::string const & input);
@@ -71,7 +72,7 @@ class	ScalarConverter
 		};
 
 	private:
-		// CONSTRUCTORS - DESTRUCTOR
+		// CONSTRUCTORS : cannot be declared as static because they are responsible for initialization.
 		ScalarConverter(); // Default constructor
 		ScalarConverter(std::string const & setInput); // Parameterized constructor
 		ScalarConverter(const ScalarConverter& src); // Default copy constructor
