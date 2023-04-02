@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 19:32:21 by mochan            #+#    #+#             */
-/*   Updated: 2023/04/02 12:23:16 by mochan           ###   ########.fr       */
+/*   Updated: 2023/04/02 13:23:27 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ int main(int ac, char **argv)
 				
 				ScalarConverter* Convert3 = ScalarConverter::createDefaultCopyInstance(*Convert2);
 				std::cout << Convert3->getInput() << "\n";
+
+				ScalarConverter* Convert4 = Convert3;
+				std::cout << Convert4->getInput() << "\n";
 
 				delete Convert1;
 				delete Convert2;

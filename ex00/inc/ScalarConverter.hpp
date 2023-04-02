@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 19:33:14 by mochan            #+#    #+#             */
-/*   Updated: 2023/04/02 12:18:36 by mochan           ###   ########.fr       */
+/*   Updated: 2023/04/02 13:23:29 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ class	ScalarConverter
 		// bool	isInt(std::string const & input);
 		// bool	isFloat(std::string const & input);
 		// bool	isDouble(std::string const & input);
-		// void	checkType(std::string const & input);
+		// static void	checkType(std::string const & input);
 		// void	createConversionsFromNotValid(void);
 		// void	createConversionsFromChar(std::string const & input);
 		// void	createConversionsFromInt(std::string const & input);

@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 13:24:59 by mochan            #+#    #+#             */
-/*   Updated: 2023/04/02 12:19:48 by mochan           ###   ########.fr       */
+/*   Updated: 2023/04/02 13:20:11 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ ScalarConverter*	ScalarConverter::createDefaultCopyInstance(const ScalarConverte
 {
 	return new ScalarConverter(src);
 }
+
 
 //======== CONSTRUCTORS =========================================================================
 ScalarConverter::ScalarConverter()
