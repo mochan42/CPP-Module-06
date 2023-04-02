@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 15:01:08 by mochan            #+#    #+#             */
-/*   Updated: 2023/04/01 15:42:52 by mochan           ###   ########.fr       */
+/*   Updated: 2023/04/02 16:05:34 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,8 @@ class	Serializer
 		// GETTERS - SETTERS
 
 		// MEMBER FUNCTIONS
-		uintptr_t	serialize(Data* ptr);
-		Data*		deserialize(uintptr_t raw);
-
-	private:
-		
+		static uintptr_t	serialize(Data* ptr);
+		static Data*		deserialize(uintptr_t raw);
 };
 
 #endif
